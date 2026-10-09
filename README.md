@@ -1,20 +1,31 @@
-﻿# Blood Donation & Emergency Assistance Platform - Backend API
+# Blood Donation & Emergency Logistics Platform - Backend API
 
-Robust, scalable, and secure RESTful backend API for Blood Donation & Emergency Platform built with Node.js, Express, TypeScript, Prisma, and PostgreSQL.
+A secure, scalable RESTful backend service built for managing emergency blood donations, donor-recipient logistics matching, and integrated payments.
 
-## Features
-- Strict Role-Based Access Control (RBAC): 3 Roles (ADMIN, DONOR, RECIPIENT).
-- Standardized API Response: Consistent structure for all success and error responses.
-- Robust Authentication: Email/Password + GCP Social Login integration.
-- 20+ Production-Ready Endpoints: Pagination, filtering, searching, soft deletes, and audit trails.
-- Concurrency & Transaction Safety: Atomic Prisma transactions for donor assignment preventing race conditions.
-- Real Payment Processing: Stripe Payment Intent and verification flow.
-- Database Indexing & Soft Deletes: High performance queries with proper indices.
+## ?? Live Deployment & API Resources
+- Live Server URL: https://blood-donation-emergency-platform-eosin.vercel.app
+- Postman API Documentation: https://documenter.getpostman.com/view/55173835/2sBYHQ2NT6
+- GitHub Repository: https://github.com/abdulalimax/Blood-Donation-Emergency-Platform
 
-## Demo Credentials
-- Admin: admin@bloodemergency.com / admin123456
-- Donor: donor@bloodemergency.com / donor123456
-- Recipient: recipient@bloodemergency.com / recipient123456
+## ??? Technology Stack
+- Runtime & Framework: Node.js, Express.js
+- Language: TypeScript
+- ORM: Prisma ORM
+- Database: PostgreSQL
+- Authentication: JWT, bcrypt, Google OAuth
+- Payment Processing: Stripe Checkout Session API
+- Deployment: Vercel (Serverless Functions)
 
-## Postman Collection
-Import postman_collection.json located in the project root directly into Postman. Set environment variable baseUrl to http://localhost:5000.
+## ?? Core Features
+1. Role-based Authentication (DONOR, RECIPIENT, ADMIN) & JWT tokens.
+2. Filter & Query blood donors by blood group and city.
+3. Manage emergency blood donation requests.
+4. Stripe Hosted Checkout session creation & logistics verification.
+
+## ?? Environment Variables
+Ensure the following variables are in .env and Vercel Project Settings:
+- PORT=5000
+- DATABASE_URL="your_database_url"
+- JWT_SECRET="your_jwt_secret"
+- JWT_EXPIRES_IN="7d"
+- STRIPE_SECRET_KEY="sk_test_..."
