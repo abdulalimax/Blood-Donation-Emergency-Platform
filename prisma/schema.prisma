@@ -1,0 +1,120 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  ADMIN
+  DONOR
+  RECIPIENT
+}
+
+enum BloodGroup {
+  A_POSITIVE
+  A_NEGATIVE
+  B_POSITIVE
+  B_NEGATIVE
+  AB_POSITIVE
+  AB_NEGATIVE
+  O_POSITIVE
+  O_NEGATIVE
+}
+
+enum RequestStatus {
+  PENDING
+  VERIFIED
+  ASSIGNED
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
+model User {
+  id               String         @id @default(uuid())
+  name             String
+  email            String         @unique
+  password         String?
+  role             Role           @default(RECIPIENT)
+  phone            String?
+  bloodGroup       BloodGroup?
+  isAvailable      Boolean        @default(true)
+  city             String?
+  lastDonationDate DateTime?
+  googleId         String?        @unique
+  deletedAt        DateTime?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  createdRequests  BloodRequest[] @relation("RecipientRequests")
+  assignedRequests BloodRequest[] @relation("DonorRequests")
+  auditLogs        AuditLog[]
+  payments         Payment[]
+
+  @@index([email])
+  @@index([bloodGroup, city, isAvailable])
+}
+
+model BloodRequest {
+  id              String        @id @default(uuid())
+  recipientId     String
+  donorId         String?
+  bloodGroup      BloodGroup
+  unitsNeeded     Int           @default(1)
+  hospitalName    String
+  hospitalAddress String
+  contactNumber   String
+  emergencyLevel  String        @default("CRITICAL")
+  status          RequestStatus @default(PENDING)
+  deletedAt       DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  recipient       User          @relation("RecipientRequests", fields: [recipientId], references: [id])
+  donor           User?         @relation("DonorRequests", fields: [donorId], references: [id])
+  payments        Payment[]
+
+  @@index([status])
+  @@index([bloodGroup])
+}
+
+model Payment {
+  id              String        @id @default(uuid())
+  userId          String
+  requestId       String?
+  amount          Float
+  currency        String        @default("usd")
+  status          PaymentStatus @default(PENDING)
+  stripeSessionId String?       @unique
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  user            User          @relation(fields: [userId], references: [id])
+  request         BloodRequest? @relation(fields: [requestId], references: [id])
+
+  @@index([userId])
+  @@index([stripeSessionId])
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  action    String
+  entity    String
+  entityId  String?
+  details   String?
+  createdAt DateTime @default(now())
+
+  user      User?    @relation(fields: [userId], references: [id])
+
+  @@index([action])
+  @@index([entity])
+}
