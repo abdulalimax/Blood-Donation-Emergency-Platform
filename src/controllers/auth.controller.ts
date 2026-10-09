@@ -2,8 +2,9 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt, { SignOptions } from "jsonwebtoken";
 import { OAuth2Client } from "google-auth-library";
-import { prisma } from "../config/prisma";
+import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID || "mock-client-id");
 
 export const register = async (req: Request, res: Response): Promise<void> => {
