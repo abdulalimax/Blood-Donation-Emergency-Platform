@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt, { SignOptions } from "jsonwebtoken";
 import { OAuth2Client } from "google-auth-library";
-import { prisma } from "../config/db";
+import { prisma } from "../config/prisma";
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID || "mock-client-id");
 
-export const registerUser = async (req: Request, res: Response): Promise<void> => {
+export const register = async (req: Request, res: Response): Promise<void> => {
   try {
     const { name, email, password, role, bloodGroup, city, phone } = req.body;
 
@@ -41,7 +41,7 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
   }
 };
 
-export const loginUser = async (req: Request, res: Response): Promise<void> => {
+export const login = async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, password } = req.body;
 
@@ -80,7 +80,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export const googleSocialLogin = async (req: Request, res: Response): Promise<void> => {
+export const gcpLogin = async (req: Request, res: Response): Promise<void> => {
   try {
     const { idToken } = req.body;
     let email = "demo@gmail.com";
