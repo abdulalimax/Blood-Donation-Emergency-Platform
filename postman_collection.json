@@ -1,0 +1,254 @@
+﻿{
+  "info": {
+    "name": "B7A6 Blood Donation & Emergency Platform APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Auth - Register",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"testuser@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"DONOR\",\n  \"bloodGroup\": \"O_POSITIVE\",\n  \"city\": \"Dhaka\",\n  \"phone\": \"01800000000\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/auth/register"
+      }
+    },
+    {
+      "name": "2. Auth - Login (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@bloodemergency.com\",\n  \"password\": \"admin123456\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/auth/login"
+      }
+    },
+    {
+      "name": "3. Auth - GCP Social Login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"idToken\": \"mock-google-id-token\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/auth/gcp-login"
+      }
+    },
+    {
+      "name": "4. User - Get Profile",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/api/v1/users/me"
+      }
+    },
+    {
+      "name": "5. User - Update Profile",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"city\": \"Chittagong\",\n  \"isAvailable\": true\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/users/me"
+      }
+    },
+    {
+      "name": "6. User - Find Compatible Donors",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/api/v1/users/compatible-donors?bloodGroup=O_POSITIVE&city=Dhaka"
+      }
+    },
+    {
+      "name": "7. Request - Create Blood Request",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"bloodGroup\": \"O_POSITIVE\",\n  \"unitsNeeded\": 1,\n  \"hospitalName\": \"Apollo Hospital\",\n  \"hospitalAddress\": \"Dhaka\",\n  \"contactNumber\": \"01711111111\",\n  \"emergencyLevel\": \"CRITICAL\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/requests"
+      }
+    },
+    {
+      "name": "8. Request - Get All Requests (Filter & Pagination)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/api/v1/requests?page=1&limit=10&status=PENDING"
+      }
+    },
+    {
+      "name": "9. Request - Get Request By ID",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/api/v1/requests/{{requestId}}"
+      }
+    },
+    {
+      "name": "10. Request - Update Request",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"emergencyLevel\": \"HIGH\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/requests/{{requestId}}"
+      }
+    },
+    {
+      "name": "11. Request - Soft Delete Request",
+      "request": {
+        "method": "DELETE",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/api/v1/requests/{{requestId}}"
+      }
+    },
+    {
+      "name": "12. Request - Donor Accept Request",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{donorToken}}" }],
+        "url": "{{baseUrl}}/api/v1/requests/{{requestId}}/accept"
+      }
+    },
+    {
+      "name": "13. Request - Mark Complete",
+      "request": {
+        "method": "PATCH",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/api/v1/requests/{{requestId}}/complete"
+      }
+    },
+    {
+      "name": "14. Request - Cancel Request",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/api/v1/requests/{{requestId}}/cancel"
+      }
+    },
+    {
+      "name": "15. Request - Get My Requests",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/api/v1/requests/my-requests"
+      }
+    },
+    {
+      "name": "16. Request - Get My Accepted Donations",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{donorToken}}" }],
+        "url": "{{baseUrl}}/api/v1/requests/my-donations"
+      }
+    },
+    {
+      "name": "17. Payment - Initiate Stripe Session",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"requestId\": \"{{requestId}}\",\n  \"amount\": 15.00\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/payments/initiate"
+      }
+    },
+    {
+      "name": "18. Payment - Verify Payment",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"paymentId\": \"{{paymentId}}\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/payments/verify"
+      }
+    },
+    {
+      "name": "19. Payment - Get Payment By ID",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/api/v1/payments/{{paymentId}}"
+      }
+    },
+    {
+      "name": "20. Admin - Get All Users",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+        "url": "{{baseUrl}}/api/v1/admin/users"
+      }
+    },
+    {
+      "name": "21. Admin - Change User Role",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"role\": \"DONOR\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/admin/users/{{userId}}/role"
+      }
+    },
+    {
+      "name": "22. Admin - Dashboard Statistics",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+        "url": "{{baseUrl}}/api/v1/admin/dashboard-stats"
+      }
+    },
+    {
+      "name": "23. Admin - Audit Logs",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+        "url": "{{baseUrl}}/api/v1/admin/audit-logs"
+      }
+    },
+    {
+      "name": "24. Admin - Verify Emergency Request",
+      "request": {
+        "method": "PATCH",
+        "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+        "url": "{{baseUrl}}/api/v1/admin/requests/{{requestId}}/verify"
+      }
+    }
+  ]
+}
