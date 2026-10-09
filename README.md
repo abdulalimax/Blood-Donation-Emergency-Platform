@@ -1,31 +1,18 @@
-# Blood Donation & Emergency Logistics Platform - Backend API
+# Blood Donation & Emergency Service Platform
 
-A secure, scalable RESTful backend service built for managing emergency blood donations, donor-recipient logistics matching, and integrated payments.
+A backend API service built to connect blood donors with recipients and manage emergency medical requests efficiently.
 
-## ?? Live Deployment & API Resources
-- Live Server URL: https://blood-donation-emergency-platform-eosin.vercel.app
-- Postman API Documentation: https://documenter.getpostman.com/view/55173835/2sBYHQ2NT6
-- GitHub Repository: https://github.com/abdulalimax/Blood-Donation-Emergency-Platform
+## Project Overview
+This platform automates blood donation matching, enables real-time donor searches by blood group and location, and provides integrated logistics support for emergency medical situations.
 
-## ??? Technology Stack
-- Runtime & Framework: Node.js, Express.js
-- Language: TypeScript
-- ORM: Prisma ORM
-- Database: PostgreSQL
-- Authentication: JWT, bcrypt, Google OAuth
-- Payment Processing: Stripe Checkout Session API
-- Deployment: Vercel (Serverless Functions)
+## Key Features
+- Role-based authentication and authorization (Donor, Recipient, Admin) using JWT.
+- Blood donor search and filtering based on blood group, availability, and district.
+- Emergency blood request creation, management, and donor response handling.
+- Integrated payment processing via Stripe for emergency delivery logistics.
 
-## ?? Core Features
-1. Role-based Authentication (DONOR, RECIPIENT, ADMIN) & JWT tokens.
-2. Filter & Query blood donors by blood group and city.
-3. Manage emergency blood donation requests.
-4. Stripe Hosted Checkout session creation & logistics verification.
-
-## ?? Environment Variables
-Ensure the following variables are in .env and Vercel Project Settings:
-- PORT=5000
-- DATABASE_URL="your_database_url"
-- JWT_SECRET="your_jwt_secret"
-- JWT_EXPIRES_IN="7d"
-- STRIPE_SECRET_KEY="sk_test_..."
+## Technology Stack
+- **Language & Runtime:** TypeScript, Node.js
+- **Framework:** Express.js
+- **Database & ORM:** PostgreSQL, Prisma ORM
+- **Payment Gateway:** Stripe
