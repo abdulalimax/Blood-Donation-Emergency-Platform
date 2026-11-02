@@ -1,15 +1,6 @@
-<div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Blood%20Donation%20API&fontSize=34&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Emergency%20Medical%20Service%20Platform%20Backend&descSize=15&descColor=38bdf8" width="100%" />
-</div>
+### 📋 Project Overview
 
-<div align="center">
-  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white" />
-  <img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white" />
-  <img src="https://img.shields.io/badge/Express.js-000000?style=flat&logo=express&logoColor=white" />
-  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white" />
-  <img src="https://img.shields.io/badge/Prisma-2D3748?style=flat&logo=prisma&logoColor=white" />
-  <img src="https://img.shields.io/badge/Stripe-626CD9?style=flat&logo=stripe&logoColor=white" />
-</div>
+The **Blood Donation & Emergency Service Platform** is a robust backend API service engineered to bridge the critical gap between blood donors and emergency medical recipients. This platform automates donor matching, enables real-time location and blood group filtering, handles emergency request dispatches, and provides secure payment logistics support.
 
 ---
 
@@ -18,12 +9,6 @@
 - **Live API Deployment:** [Access Live Service](https://blood-donation-emergency-platform-eosin.vercel.app)
 - **API Documentation (Postman):** [View Postman Docs](https://documenter.getpostman.com/view/55173835/2sBYHQ2NT6)
 - **GitHub Repository:** [Client/Server Repo](https://github.com/abdulalimax/Blood-Donation-Emergency-Platform)
-
----
-
-### 📋 Project Overview
-
-The **Blood Donation & Emergency Service Platform** is a robust backend API service engineered to bridge the critical gap between blood donors and emergency medical recipients. This platform automates donor matching, enables real-time location and blood group filtering, handles emergency request dispatches, and provides secure payment logistics support.
 
 ---
 
